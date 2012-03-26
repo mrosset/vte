@@ -3,12 +3,15 @@ package vte
 /*
 #include <stdlib.h>
 #include <vte/vte.h>
+#include <gdk/gdk.h>
+
 static VteTerminal* to_VteTerminal(void* w) { return VTE_TERMINAL(w); }
 */
 // #cgo pkg-config: vte
 import "C"
 
 import (
+	"github.com/mattn/go-gtk/gdk"
 	"github.com/mattn/go-gtk/gtk"
 	"unsafe"
 )
@@ -22,6 +25,8 @@ func (v *Terminal) getTerminal() *C.VteTerminal {
 }
 
 func (v *Terminal) Feed(m string) {
+	c := C.CString(m)
+	defer C.free(unsafe.Pointer(c))
 	C.vte_terminal_feed(v.getTerminal(), C.CString(m), -1)
 }
 
@@ -37,6 +42,18 @@ func (v *Terminal) Fork(a string) {
 		nil,
 		nil,
 		nil, nil)
+}
+
+func (v *Terminal) BgColor(s string) {
+	c := gdk.Color(s)
+	cc := (*C.GdkColor)(unsafe.Pointer(&c.Color))
+	C.vte_terminal_set_color_background(v.getTerminal(), cc)
+}
+
+func (v *Terminal) FgColor(s string) {
+	c := gdk.Color(s)
+	cc := (*C.GdkColor)(unsafe.Pointer(&c.Color))
+	C.vte_terminal_set_color_foreground(v.getTerminal(), cc)
 }
 
 func NewTerminal() *Terminal {

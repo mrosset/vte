@@ -1,12 +1,12 @@
-package vte
+package main
 
 import (
 	"github.com/mattn/go-gtk/gtk"
 	"os"
-	"testing"
+	"vte"
 )
 
-func TestVte(t *testing.T) {
+func main() {
 	gtk.Init(&os.Args)
 	window := gtk.Window(gtk.GTK_WINDOW_TOPLEVEL)
 	terminal := NewTerminal()
@@ -14,6 +14,5 @@ func TestVte(t *testing.T) {
 	terminal.Connect("child-exited", gtk.MainQuit)
 	window.Add(terminal)
 	window.ShowAll()
-	terminal.BgColor("#324C80")
 	gtk.Main()
 }
