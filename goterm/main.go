@@ -9,10 +9,11 @@ import (
 func main() {
 	gtk.Init(&os.Args)
 	window := gtk.Window(gtk.GTK_WINDOW_TOPLEVEL)
-	terminal := NewTerminal()
+	terminal := vte.NewTerminal()
 	terminal.Fork("bash")
 	terminal.Connect("child-exited", gtk.MainQuit)
 	window.Add(terminal)
 	window.ShowAll()
+	terminal.SetColors()
 	gtk.Main()
 }

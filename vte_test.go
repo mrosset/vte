@@ -14,6 +14,6 @@ func TestVte(t *testing.T) {
 	terminal.Connect("child-exited", gtk.MainQuit)
 	window.Add(terminal)
 	window.ShowAll()
-	terminal.BgColor("#324C80")
+	terminal.SetColors()
 	gtk.Main()
 }
