@@ -53,24 +53,28 @@ var pal = map[int]string{}
 
 func init() {
 	pal[Black] = "#000000"
-	pal[Black_Light] = "#252525"
+	pal[BlackLight] = "#252525"
 
 	pal[Red] = "#803232"
+	pal[RedLight] = "#982B2B"
 
 	pal[Green] = "#85A136"
-	pal[Green_Light] = "#85A136"
+	pal[GreenLight] = "#85A136"
 
 	pal[Yellow] = "#AA9943"
+	pal[YellowLight] = "#EFEF60"
 
 	pal[Blue] = "#324C80"
-	pal[Blue_Light] = "#4186BE"
+	pal[BlueLight] = "#4186BE"
 
 	pal[Magenta] = "#706C9A"
-	pal[Magenta_Light] = "#826AB1"
+	pal[MagentaLight] = "#826AB1"
 
 	pal[Cyan] = "#92B19E"
+	pal[CyanLight] = "#A1CDCD"
 
 	pal[White] = "#E7E7E7"
+	pal[WhiteLight] = "#E7E7E&"
 }
 
 const (
@@ -82,12 +86,14 @@ const (
 	Magenta
 	Cyan
 	White
-	Black_Light
-	Red_Light
-	Green_Light
-	Yellow_Light
-	Blue_Light
-	Magenta_Light
+	BlackLight
+	RedLight
+	GreenLight
+	YellowLight
+	BlueLight
+	MagentaLight
+	CyanLight
+	WhiteLight
 )
 
 func (v *Terminal) SetBgColor(s string) {
