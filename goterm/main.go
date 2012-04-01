@@ -12,17 +12,12 @@ func main() {
 	terminal := vte.NewTerminal()
 	swin := gtk.ScrolledWindow(nil, nil)
 	swin.SetPolicy(gtk.GTK_POLICY_NEVER, gtk.GTK_POLICY_NEVER)
-	terminal.Fork("bash")
+	terminal.Fork([]string{"bash", "--login"})
 	terminal.Connect("child-exited", gtk.MainQuit)
-	/*
-		terminal.Connect("resize-window", func(a int, b int, ctx *glib.CallbackContext) {
-			fmt.Println("resize")
-		})
-	*/
 	swin.Add(terminal)
 	window.Add(swin)
 	window.SetSizeRequest(309, 99)
 	window.ShowAll()
-	terminal.SetColors()
+	terminal.SetColors(vte.MikePal)
 	gtk.Main()
 }
